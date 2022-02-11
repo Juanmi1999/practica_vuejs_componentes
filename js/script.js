@@ -38,23 +38,47 @@ var server_data = {
     }
 };
 
-
 // TODO: Componente edit-form
 Vue.component('edit-form', {
-
+  props: ["item","index"],
+  data: function() {
+      return {
+          datos: false,
+          formulario : true
+      }
+  },
+  methods: {
+      closeForm: {
+          formClosed(){
+              toggleEditFormVisibility();
+          }
+      }
+  },
+  template: "#editForm"
 })
 
 // TODO: Componente item-data
 Vue.component('item-data', {
-
+  props: ["item","index"],
+  data: function() {
+      return {
+          datos: true,
+          formulario : false
+      }
+  },
+  methods:{
+      toggleEditFormVisibility(){
+          this.datos = false;
+          this.formulario = true;
+      }},
+  template: '#itemData'
 })
 
 // Aplicación VueJS
 // La aplicación recibe los datos en la variable de datos "col"
 var app = new Vue({
-    el: '#app',
-    data: {
-        col: server_data
-    }
+  el: '#app',
+  data: {
+      col: server_data
+  }
 });
-
